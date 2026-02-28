@@ -1,1 +1,1 @@
-# daily-commit-action
+[![Daily Scheduled Commit](https://github.com/Vaishnav2606/daily-commit-action/actions/workflows/daily-commit.yml/badge.svg)](https://github.com/Vaishnav2606/daily-commit-action/actions/workflows/daily-commit.yml)
