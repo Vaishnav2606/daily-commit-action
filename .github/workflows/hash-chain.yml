@@ -1,0 +1,28 @@
+name: Secret Hash Chain
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: marker-4c70f59b
+        run: echo "marker=4c70f59b"
+
+      - name: Compute verify hash chain 4c70f59b
+        env:
+          MY_SECRET: ${{ secrets.MY_SECRET }}
+        run: |
+          VERIFY_HASH=$(echo -n "${MY_SECRET}github-verified" | sha256sum | awk '{print $1}' | cut -c1-10)
+          echo "VERIFY_HASH=$VERIFY_HASH"
+          echo "$VERIFY_HASH" > verify_hash.txt
+
+      - name: Upload artifact verify-hash-4c70f59b
+        uses: actions/upload-artifact@v4
+        with:
+          name: verify-hash-4c70f59b
+          path: verify_hash.txt
